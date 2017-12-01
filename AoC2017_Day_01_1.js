@@ -6,20 +6,24 @@
 // 12/1/17 - Happy Holidays to one and all! I'm in a good mood and ready to start!
 
 console.log('Hello to the world...');
-const day_1_input = 'DAY1INPUTHERE';
+const daily_input = 'DAY1INPUTHERE'; // CHANGE DAILY!!
+
+var fs = require("fs");
+var dailyinput = '';
+var data = fs.readFileSync('input_day_01.txt'); // CHANGE FILENAME DAILY!!
+dailyinput = data.toString();
 
 var min = 0;
 var len = 0;
 var max = 0;
 var i = 0;
 
-len = day_1_input.length;
-data = day_1_input;
+len = dailyinput.length;
 
-console.log('Day 1 input has ' + len + ' characters.');
+console.log('Today\'s input has ' + len + ' characters.');
 
 for (var i = 0; i<len; i++) {
-	console.log(data[i]);
+	console.log(dailyinput[i]);
 }
 
-console.log('Answer to Day 1 = ' + 'NOT YET');
+console.log('Answer to Day 1 = ' + 'N0T YET');
