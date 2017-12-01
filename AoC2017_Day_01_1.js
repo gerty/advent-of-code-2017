@@ -24,10 +24,10 @@ console.log('Today\'s input has ' + len + ' characters.');
 var answer = 0;
 
 for (var i = 0; i<len; i++) {
-	if (dailyinput[i] == dailyinput[(i+1) % len]) {
+	if (dailyinput[i] == dailyinput[(i+(len/2)) % len]) { // Part 1 "(len/2)" was "1"
 		answer = answer + parseInt(dailyinput[i]);
 		console.log("Adding " + dailyinput[i]);
 	}
 }
 
-console.log('Answer to Day 1 Part 1 = ' + answer); // not 1174, 1122
+console.log('Answer to Day 1 Part 1 = ' + answer); // not 1174, 1177
