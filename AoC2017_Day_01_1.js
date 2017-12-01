@@ -6,11 +6,11 @@
 // 12/1/17 - Happy Holidays to one and all! I'm in a good mood and ready to start!
 
 console.log('Hello to the world...');
-const daily_input = 'DAY1INPUTHERE'; // CHANGE DAILY!!
 
 var fs = require("fs");
 var dailyinput = '';
 var data = fs.readFileSync('input_day_01.txt'); // CHANGE FILENAME DAILY!!
+//var data = fs.readFileSync('test_input_01.txt'); // CHANGE FILENAME DAILY!!
 dailyinput = data.toString();
 
 var min = 0;
@@ -21,9 +21,13 @@ var i = 0;
 len = dailyinput.length;
 
 console.log('Today\'s input has ' + len + ' characters.');
+var answer = 0;
 
 for (var i = 0; i<len; i++) {
-	console.log(dailyinput[i]);
+	if (dailyinput[i] == dailyinput[(i+1) % len]) {
+		answer = answer + parseInt(dailyinput[i]);
+		console.log("Adding " + dailyinput[i]);
+	}
 }
 
-console.log('Answer to Day 1 = ' + 'N0T YET');
+console.log('Answer to Day 1 Part 1 = ' + answer); // not 1174, 1122
