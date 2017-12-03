@@ -14,12 +14,12 @@ var data = fs.readFileSync('input_day_03.txt'); // CHANGE FILENAME DAILY!!
 dailyinput = data.toString();
 
 var len = 0;
-var input = new Array(); // usually an array is involved. Leave length arbitrary for now.
+var inputArray = new Array(); // usually an array is involved. Leave length arbitrary.
 var answer1 = 0;
 var answer2 = 0;
 
 for (var z=0; z<16; z++) {  // for 2-dimensional array of 16
-	sheet[z] = new Array(); 
+	inputArray[z] = new Array(); 
 }
 
 len = dailyinput.length; // How long is the input? A useful thing to know.
@@ -28,10 +28,10 @@ console.log('Today\'s input has ' + len + ' characters.');
 
 var lines = dailyinput.split('\n'); // splitting the input into lines by newline
 for (var i=0;i<lines.length;i++) {
-	sheet[i] = lines[i].split('\t'); // splitting the lines into items by tabs
+	inputArray[i] = lines[i].split('\t'); // splitting the lines into items by tabs
 }
 
-console.log(sheet);
+console.log(inputArray);
 
 for (var i=0;i<16;i++) {
 	for (var j=0;j<16;j++) { // now we go line by line through a 16x16 array
