@@ -29,12 +29,19 @@ for (var i=0;i<lines.length;i++) {
 
 console.log(inputArray);
 
+// Lets find the number of bad passphrases
 for (var i=0;i<lines.length;i++) {
 	for (var j=0;j<lines[i].length;j++) { // now we go line by line through array
-		// do something important
+		for (var k=0;k<j;k++) { // only go back and check behind you in array
+			if (lines[i][j] == lines[i][k]) {
+				answer1++;
+				j = lines[i].length; // zoom to end of array so you don't count twice
+			}
+		}
 	}
 }
 
-console.log('Answer to Day 3 Part 1 = ' + answer1);
+answer1 = len - answer1; // counted the invalid - subtract out the valid?
+console.log('Answer to Day 3 Part 1 = ' + answer1); // not 22521
 
 console.log('Answer to Day 3 Part 2 = ' + answer2);
