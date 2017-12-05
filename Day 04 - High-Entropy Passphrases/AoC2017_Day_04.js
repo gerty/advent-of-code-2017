@@ -19,21 +19,19 @@ var answer1 = 0;
 var answer2 = 0;
 
 len = dailyinput.length; // How long is the input? A useful thing to know.
-console.log(dailyinput);
 console.log('Today\'s input has ' + len + ' characters.');
 
 var lines = dailyinput.split('\n'); // splitting the input into lines by newline
 for (var i=0;i<lines.length;i++) {
 	inputArray[i] = lines[i].split(' '); // splitting the lines into items by spaces
 }
-
-console.log(inputArray);
+console.log('Today\'s input has ' + lines.length + ' lines.');
 
 // Lets find the number of bad passphrases
 for (var i=0;i<lines.length;i++) {
 	for (var j=0;j<lines[i].length;j++) { // now we go line by line through array
 		for (var k=0;k<j;k++) { // only go back and check behind you in array
-			if (lines[i][j] == lines[i][k]) {
+			if (lines[i][j] === lines[i][k]) {
 				answer1++;
 				j = lines[i].length; // zoom to end of array so you don't count twice
 			}
@@ -41,7 +39,7 @@ for (var i=0;i<lines.length;i++) {
 	}
 }
 
-answer1 = len - answer1; // counted the invalid - subtract out the valid?
-console.log('Answer to Day 3 Part 1 = ' + answer1); // not 22521
+answer1 = lines.length - answer1; // counted the invalid - subtract out the valid
+console.log('Answer to Day 4 Part 1 = ' + answer1); // not 22521
 
-console.log('Answer to Day 3 Part 2 = ' + answer2);
+console.log('Answer to Day 4 Part 2 = ' + answer2);
