@@ -27,9 +27,9 @@ for (var i=0;i<lines.length;i++) {
 	// Lets find the number of bad passphrases in this line
 	for (var j=1;j<inputArray.length;j++) { // now we go line by line through array
 		for (var k=0;k<j;k++) { // only go back and check behind you in array
-			if (inputArray[j] === inputArray[k]) {
+			if (inputArray[j].toLowerCase().split('').sort().join('').trim() === inputArray[k].toLowerCase().split('').sort().join('').trim()) {
 				answer1++;
-				console.log("Whoops: " + inputArray[j] + " === " + inputArray[k]);
+				console.log("Whoops: " + inputArray[j] + " is an anagram of " + inputArray[k]);
 				j = inputArray.length; // zoom to end of array so you don't count twice
 			}
 		}
