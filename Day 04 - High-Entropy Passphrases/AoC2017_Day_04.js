@@ -23,23 +23,21 @@ console.log('Today\'s input has ' + len + ' characters.');
 
 var lines = dailyinput.split('\n'); // splitting the input into lines by newline
 for (var i=0;i<lines.length;i++) {
-	inputArray[i] = lines[i].split(' '); // splitting the lines into items by spaces
-}
-console.log('Today\'s input has ' + lines.length + ' lines.');
-
-// Lets find the number of bad passphrases
-for (var i=0;i<lines.length;i++) {
-	for (var j=0;j<lines[i].length;j++) { // now we go line by line through array
+	inputArray = lines[i].split(" "); // splitting the lines into items by spaces
+	// Lets find the number of bad passphrases in this line
+	for (var j=1;j<inputArray.length;j++) { // now we go line by line through array
 		for (var k=0;k<j;k++) { // only go back and check behind you in array
-			if (lines[i][j] === lines[i][k]) {
+			if (inputArray[j] === inputArray[k]) {
 				answer1++;
-				j = lines[i].length; // zoom to end of array so you don't count twice
+				console.log("Whoops: " + inputArray[j] + " === " + inputArray[k]);
+				j = inputArray.length; // zoom to end of array so you don't count twice
 			}
 		}
 	}
 }
+console.log('Today\'s input has ' + lines.length + ' lines.');
 
 answer1 = lines.length - answer1; // counted the invalid - subtract out the valid
-console.log('Answer to Day 4 Part 1 = ' + answer1); // not 22521
+console.log('Answer to Day 4 Part 1 = ' + answer1); // not 22521 // not 513 // not 467
 
 console.log('Answer to Day 4 Part 2 = ' + answer2);
