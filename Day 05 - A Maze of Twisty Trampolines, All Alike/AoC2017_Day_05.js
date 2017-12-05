@@ -8,8 +8,8 @@ console.log('Hello to the world...day 5 is come!');
 
 var fs = require("fs");
 var dailyinput = '';		// init daily input string
-//var data = fs.readFileSync('input.txt');
-var data = fs.readFileSync('test.txt');
+var data = fs.readFileSync('input.txt');
+//var data = fs.readFileSync('test.txt');
 dailyinput = data.toString();
 
 var len = 0;
@@ -27,7 +27,7 @@ for (var z=0;z<lines.length;z++) {  // convert to an array of integers
 	numArray[z] = parseInt(lines[z]);
 }
 
-console.log(numArray);
+// console.log(numArray);
 
 var i = 0;   // true index
 var whereAmI = 0;  // record where you came from each time
@@ -35,17 +35,22 @@ var steps = 0;   // count all the steps (really jumps)
 
 while ((i>=0) && (i<numArray.length)) { // while within the bounds
 	whereAmI = i;  // record starting off point
-	console.log(numArray[whereAmI] + ' is at index ' + whereAmI);
+	// console.log(numArray[whereAmI] + ' is at index ' + whereAmI);
 	i += numArray[i];  // go to new spot 
-	numArray[whereAmI]++; // increase the spot where you were by 1
-	steps++;
-	console.log(steps + ' steps.');
+	if (numArray[whereAmI] >= 3) {
+		numArray[whereAmI]--; // increase the spot where you were by 1
+	}
+	else {
+		numArray[whereAmI]++; // increase the spot where you were by 1
+	}
+	if ((i>=0) && (i<numArray.length)) {
+		answer2++;
+	}
 } 
-console.log(numArray);
-answer1 = steps;
+//console.log(numArray);
 
 console.log('Today\'s input has ' + lines.length + ' lines.');
 
-console.log('Answer to Day 5 Part 1 = ' + answer1); // not 325292 325923 59059671 325923
+console.log('Answer to Day 5 Part 1 = ' + answer1); // not 325292 325923 59059671, but 325922
 
 console.log('Answer to Day 5 Part 2 = ' + answer2);
