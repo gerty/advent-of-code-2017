@@ -8,14 +8,14 @@ console.log('Hello to the world...day 6 is come!');
 
 var fs = require("fs");
 var dailyinput = '';		// init daily input string
-var data = fs.readFileSync('input.txt');
-//var data = fs.readFileSync('test.txt');
+//var data = fs.readFileSync('input.txt');
+var data = fs.readFileSync('test.txt');
 dailyinput = data.toString();
 
 var inputLength = 0;
 var count = 0;
 var numArray = new Array();
-var textArray = new Array();
+var wordArray = new Array();
 var intArray = new Array();
 var answer1 = 0;
 var answer2 = 0;
@@ -33,10 +33,13 @@ for (var z=0;z<lines.length;z++) {    // if each line contains a single integer
 for (var z=0;z<lines.length;z++) {      // if each line contains multiple entries
 	wordArray[z] = lines[z].split(' '); // split elements on each line by spaces
 }
-
+console.log(lines);
 for (var z=0;z<lines.length;z++) {
 	for (y=0;y<lines[z].length;y++) {
-		intArray[y][z] = parseInt(lines[z]); // on each line convert to ints, put in array
+		console.log(z);
+		console.log(y);
+		intArray[z] = new Array();
+		intArray[z][y] = parseInt(lines[z][y]); // on each line convert to ints, put in array
 	}
 }
 
