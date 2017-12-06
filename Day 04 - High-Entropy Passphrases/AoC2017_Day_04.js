@@ -46,6 +46,6 @@ console.log('Today\'s input has ' + lines.length + ' lines.');
 
 answer1 = lines.length - answer1; // counted the invalid - subtract out the valid
 answer2 = lines.length - answer2; // counted the invalid - subtract out the valid
-console.log('Answer to Day 4 Part 1 = ' + answer1); // not 22521 // not 513 // not 467
+console.log('Answer to Day 4 Part 1 = ' + answer1); // not 22521 // not 513 // not 467 (466!)
 
-console.log('Answer to Day 4 Part 2 = ' + answer2); // not 195 (low) not 403 (high) 261 (high)
+console.log('Answer to Day 4 Part 2 = ' + answer2); // not 195 (low) 403 (high) 261 (high) 252 (251?)
