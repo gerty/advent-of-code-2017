@@ -6,6 +6,7 @@
 // 12/6/17 - Happy Holidays! Learning a lot so far, but down to 3 on the leaderboard.
 console.log('\n');
 console.log('*** Hello to the world...day 6 is come! ***');
+console.log('\n');
 
 var fs = require("fs");
 //var crypto = require("crypto");
