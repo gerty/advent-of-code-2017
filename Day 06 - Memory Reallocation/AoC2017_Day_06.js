@@ -4,62 +4,69 @@
 // Comments and suggestions welcome
 
 // 12/6/17 - Happy Holidays! Learning a lot so far, but down to 3 on the leaderboard.
-console.log('Hello to the world...day 6 is come!');
+console.log('\n');
+console.log('*** Hello to the world...day 6 is come! ***');
 
 var fs = require("fs");
-var crypto = require("crypto");
+//var crypto = require("crypto");
 var dailyinput = '';		// init daily input string
-var data = fs.readFileSync('input.txt');
-//var data = fs.readFileSync('test.txt');
+//var data = fs.readFileSync('input.txt');
+var data = fs.readFileSync('test.txt');
 dailyinput = data.toString();
 
-var numArray = new Array();
-var answerArray = new Array();
-var count = 0;
+var inputArray = new Array();  // this is the array of input that we will be manipulating
+var answerArray = new Array(); // this is the recorded history
 var answer1 = 0;
 var answer2 = 0;
 
-var inputLength = dailyinput.length; // How long is the input? A useful thing to know.
-console.log('Today\'s input has ' + inputLength + ' characters.');
+var items = dailyinput.split('\t'); // splitting the input into strings by tabs
 
-var lines = dailyinput.split('\t'); // splitting the input into strings by tabs
-// now we have an array of strings for each line
+console.log('Today\'s input has ' + items.length + ' items.');
 
-console.log('Today\'s input has ' + lines.length + ' items.');
-
-for (var z=0;z<lines.length;z++) {    // if each string contains a single integer
-	numArray[z] = parseInt(lines[z]); // convert to an array of integers
+for (var z=0;z<items.length;z++) {       // each string contains a single integer
+	inputArray[z] = parseInt(items[z],16); // convert to an array of hex
 }
 
-console.log(lines);
-console.log(numArray); // work with numArray today
+console.log('INPUT = ' + inputArray);
+var count = 0;
 
+while (answer1 === 0) {  // while inputArray doesn't match anything in history
+	answerArray[count] = new Array();
+	answerArray[count] = inputArray; // add to history
+	count++;
 
-while (answer1 == 0) {
-	if (ansChecksum in answerArray) { // if the current array is in the history
-		answer1 = count; // the answer would be the count
+	for (var a=1; a<answerArray.length; a++) { // compare new inputArray with history
+		if (inputArray === answerArray[a]) { // if the current array is in the history
+			console.log('Found that ' + answerArray[a] + ' is in the history.');
+			answer1 = count; // the answer would be the length of history
+		}
 	}
-	answerArray[count++] = ansChecksum; // add to history
-	
-	console.log(ansChecksum);
 
-// two ideas: one to put each answer in a hash table, then look up to see if anything is there
-// 			  another idea is to use a linked list to store the value and pointer to the next
-	
 	// redistribute
-	var maximum = Math.max(...numArray);
-	var a = numArray.indexOf(maximum);
-	numArray[a] = 0;
-	while (maximum > 0) {
-		a++;
-		if (a > 16) a = 0;
-		numArray[a]++;
-		maximum--;
+	console.log('History looks like this now: ' + answerArray);
+	var maximum = Math.max(...inputArray); // find the max
+	console.log('MAX: ' + maximum);
+	var a = inputArray.indexOf(maximum); // go to the max's index
+	console.log('at location: ' + a);
+	inputArray[a] = 0; // zero out the max
+	while (maximum > 0) { // drain it out until 0
+		a++; if (a > items.length-1) a = 0;  // got to the next location with wraparound
+		inputArray[a]++; // increment where we land
+		maximum--; // one more down
 	}
+	
+	console.log(inputArray);
+	console.log(answerArray);
+	
+// ideas: one to put each answer in a hash table, then look up to see if anything is there
+// 		  another idea is to use a linked list to store the value and pointer to the next
+//		  third idea to store state in strings of hex
+
 	// done redistributing when original maximum=0 and all are increased by 1
-	// console.log(numArray);
+	console.log(inputArray + ' for iteration ' + answerArray.length);
+	console.log(answer1);
 } // do it again unless you found a match in history
 
 console.log('Answer to Day 6 Part 1 = ' + answer1);
 
-console.log('Answer to Day 6 Part 2 = ' + answer2);
+console.log('\rAnswer to Day 6 Part 2 = ' + answer2);
