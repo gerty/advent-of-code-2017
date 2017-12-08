@@ -3,8 +3,8 @@
 // Repo located at https://github.com/gerty/advent-of-code-2017
 // Comments and suggestions welcome
 
-// 12/4-5/17 - Happy Holidays! Work is taking its toll. Quick shot before bed for points.
-console.log('Hello to the world...day 5 is come!');
+// 12/4-5/17 - Colder today in Houston. I'm wearing a hoodie. Hope that helps.
+console.log('Hello to the world...day 8 is come!');
 
 var fs = require("fs");
 var dailyinput = '';		// init daily input string
