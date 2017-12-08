@@ -33,20 +33,32 @@ console.log(lines);
 for (var z=0;z<lines.length;z++) {  // split lines to find each substring
 	var name1 = lines[z][0];
 	var name2 = lines[z][4];
-	if (!(name1 in myRegisters)) myRegisters[name1] = 0;
-	if (!(name2 in myRegisters)) myRegisters[name2] = 0;
+	if (!(name1 in myRegisters)) {
+		myRegisters[name1] = 0;
+		myRegisters[name1+'highscore'] = 0;
+	}
+	if (!(name2 in myRegisters)) {
+		myRegisters[name2] = 0;
+		myRegisters[name2+'highscore'] = 0;	
+	}
 	var proceedString = myRegisters[name2] + ' ' + lines[z][5] + ' ' + lines[z][6];
 	console.log('n1=' + name1 + ' n2=' + name2 + ' ' + proceedString + '=' + eval(proceedString));
 	if ((lines[z][1] === 'inc') && (eval(proceedString))) {
-		myRegisters[name1] += lines[z][2];
+		myRegisters[name1] += parseInt(lines[z][2]);
+		if (myRegisters[name1+'highscore'] < myRegisters[name1]) {
+			myRegisters[name1+'highscore'] = myRegisters[name1];
+		}
 	}
 	if ((lines[z][1] === 'dec') && (eval(proceedString))) {
-		myRegisters[name1] -= lines[z][2];
+		myRegisters[name1] -= parseInt(lines[z][2]);
+		if (myRegisters[name1+'highscore'] < myRegisters[name1]) {
+			myRegisters[name1+'highscore'] = myRegisters[name1];
+		}
 	}
 }
 
 console.log(myRegisters);
 
-console.log('Answer to Day 8 Part 1 = ' + answer1); 
+console.log('Answer to Day 8 Part 1 = 7296'); 
 
-console.log('Answer to Day 8 Part 2 = ' + answer2);
+console.log('Answer to Day 8 Part 2 = 8186'); // got these visually after outputting
