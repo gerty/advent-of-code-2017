@@ -9,28 +9,67 @@ console.log('*** Hello to the world...day 9 is come! ***');
 console.log('\n');
 
 var fs = require("fs");
-var dailyinput = '';		// init daily input string
 var data = fs.readFileSync('input.txt');
 //var data = fs.readFileSync('test.txt');
-dailyinput = data.toString();
+dailyInput = data.toString(); // init daily input string
 
-var inputArray = new Array();  // this is the array of input that we will be manipulating
-var answerArray = new Array(); // this is the recorded history
 var answer1 = 0;
+var altAnswer1 = 0;
 var answer2 = 0;
 
-console.log('Today\'s input has ' + dailyinput.length + ' characters.');
+console.log('Today\'s input has ' + dailyInput.length + ' characters.');
+console.log('INPUT = ' + dailyInput);
 
-console.log('INPUT = ' + inputArray);
-var count = 0;
 
-while (answer1 === 0) {  // while inputArray doesn't match anything in history
-		
-	console.log(inputArray);
-	console.log(answerArray);
+// *************** FIRST IMPLEMENTATION ****************
+var score = 0;
+var level = 0;
+var firstPass = '';
+var secondPass = '';
+var insideGarbage = false;
 
+for (var i=0; i<dailyInput.length; i++) {
+	if (dailyInput[i] === '<') insideGarbage = true;
+	if (insideGarbage && (dailyInput[i] === '!')) {
+		i=i+2; // ignore '!' and char that follows - noticed input has no '!' near EOF
+	}	
+	else if (dailyInput[i] === '>') insideGarbage = false;
+	else if (!insideGarbage)	firstPass += (dailyInput[i]);
 } 
 
-console.log('Answer to Day 6 Part 1 = ' + answer1);
+console.log('AFTER FIRST PASS = ' + firstPass);
 
-console.log('\rAnswer to Day 6 Part 2 = ' + answer2);
+for (var i=0; i<firstPass.length; i++) {
+	if (firstPass[i] === '{') {
+		level++;
+	}
+	if ((firstPass[i] === '}') && (level>0)) {
+		score += level;
+		level--;
+		console.log(level);
+	}
+}
+answer1 = score;
+
+// *************** SECOND IMPLEMENTATION ****************
+var altScore = 0;
+var groupLevel;
+var groupStack = [];
+var inputPointer = 0;
+
+function processInput(stackInput, levelDeep) {	
+	int inputPointer=0;
+
+	while (inputPointer < dailyInput.length) {
+		if (dailyInput === '{') {
+			
+		}
+	}
+}
+altAnswer1 = altScore;
+
+console.log('Answer to Day 9 Part 1 is either:');
+console.log('Using method #1:' + answer1); // 4412 too low, 5401 too low, 8504 too high
+console.log('Using method #2:' + answer1); // 4412 too low, 5401 too low, 8504 too high
+
+console.log('Answer to Day 9 Part 2 = ' + answer2);
