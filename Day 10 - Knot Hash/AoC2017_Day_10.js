@@ -42,7 +42,7 @@ function putArraySection(array,subSection,curPos) {
 		output[i] = array[i];
 	}
 	for (var i=0; i<subSection.length; i++) { // place subsection on original content
-		output[curPos + (i % array.length)] = subSection[i];
+		output[(curPos + i) % array.length] = subSection[i];
 	}
 	console.log('Before : ' + array);
 	console.log('After  : ' + output);
@@ -52,16 +52,17 @@ function putArraySection(array,subSection,curPos) {
 var currentPosition = 0;   // true index of where the loops start
 var skipSize = 0;
 
-for (var i=0; i<loopLengths.length; i++) {
-	currentPosition = (currentPosition + skipSize) % masterLoopSize;
+for (var i=0; i<loopLengths.length; i++) { // walk through input lengths
 	var sectionToReplace = getArraySection(knotCircle,loopLengths[i],currentPosition);
-	sectionToReplace = sectionToReplace.reverse(); // ?? not sure what function reverses??
+	sectionToReplace = sectionToReplace.reverse();
 	knotCircle = putArraySection(knotCircle,sectionToReplace,currentPosition);
-	currentPosition = (currentPosition + loopLengths[i]) % masterLoopSize;
+	currentPosition = (currentPosition + loopLengths[i] + skipSize) % masterLoopSize;
+	skipSize++;
+	console.log('Current Position: ' + currentPosition + ' Skip size: ' + skipSize);
 }
 
 console.log(knotCircle);
-answer1 = knotCircle[0] * knotCircle[1]; // 52212 too high
+answer1 = knotCircle[0] * knotCircle[1]; // 52212 too high, 2928 is right!
 
 console.log('Answer to Day 10 Part 1 = ' + answer1);
 console.log('Answer to Day 10 Part 2 = ' + answer2);
