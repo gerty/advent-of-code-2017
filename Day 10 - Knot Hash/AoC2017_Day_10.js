@@ -7,8 +7,8 @@
 console.log('Hello to the world...day 10 is come!');
 
 var fs = require("fs");
-var data = fs.readFileSync('input.txt');
-//var data = fs.readFileSync('test.txt');
+//var data = fs.readFileSync('input.txt');
+var data = fs.readFileSync('test.txt');
 const masterLoopSize = 256;
 var dailyInput = data.toString();
 
@@ -31,8 +31,8 @@ function getArraySection(array,len,curPos) {
 	for (var i=0; i<len; i++) {
 		output[i] = array[(curPos+i) % array.length];
 	}
-	console.log('Found: ' + output);
-	console.log('   in: ' + array);	
+//	console.log('Found: ' + output);
+//	console.log('   in: ' + array);	
 	return(output);
 }
 
@@ -44,8 +44,8 @@ function putArraySection(array,subSection,curPos) {
 	for (var i=0; i<subSection.length; i++) { // place subsection on original content
 		output[(curPos + i) % array.length] = subSection[i];
 	}
-	console.log('Before : ' + array);
-	console.log('After  : ' + output);
+//	console.log('Before : ' + array);
+//	console.log('After  : ' + output);
 	return(output);
 }
 
@@ -65,4 +65,41 @@ console.log(knotCircle);
 answer1 = knotCircle[0] * knotCircle[1]; // 52212 too high, 2928 is right!
 
 console.log('Answer to Day 10 Part 1 = ' + answer1);
+
+var loopASCIILengths = []
+var knotASCIICircle = new Array();
+for (var i=0; i<masterLoopSize; i++) { knotASCIICircle[i] = i; } // load array
+currentPosition = 0;
+skipSize = 0;
+
+for (var i=0; i<dailyInput.length; i++) {
+	loopASCIILengths[i] = dailyInput.charCodeAt(i);
+}
+loopASCIILengths = loopASCIILengths.concat(17,31,73,47,23); // interesting add...
+
+for (var iteration=0; iteration<64; iteration++) {
+	for (var i=0; i<loopASCIILengths.length; i++) { // walk through input lengths
+		var sectionToReplace = getArraySection(knotCircle,loopLengths[i],currentPosition);
+		sectionToReplace = sectionToReplace.reverse();
+		knotASCIICircle = putArraySection(knotASCIICircle,sectionToReplace,currentPosition);
+		currentPosition = (currentPosition + loopASCIILengths[i] + skipSize) % masterLoopSize;
+		skipSize++;
+	}
+}
+
+console.log('Sparse Hash: ' + knotASCIICircle);
+var denseASCIIHash = [];
+
+for (var i=0; i<16; i++) {
+	xorTally = 0;
+	for (var j=0; j<16; j++) {
+		xorTally = xorTally ^ knotASCIICircle[i*16+j];
+	}
+	denseASCIIHash[i] = xorTally;	
+}
+
+console.log('Dense Hash: ' + denseASCIIHash);
+
+// convert to hex codes next
+
 console.log('Answer to Day 10 Part 2 = ' + answer2);
