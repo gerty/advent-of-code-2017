@@ -7,8 +7,8 @@
 console.log('Hello to the world...day 10 is come!');
 
 var fs = require("fs");
-//var data = fs.readFileSync('input.txt');
-var data = fs.readFileSync('test.txt');
+var data = fs.readFileSync('input.txt');
+//var data = fs.readFileSync('test.txt');
 const masterLoopSize = 256;
 var dailyInput = data.toString();
 var answer1 = 0;
@@ -81,9 +81,13 @@ loopASCIILengths = loopASCIILengths.concat(17,31,73,47,23); // interesting add..
 
 for (var iteration=0; iteration<64; iteration++) {
 	for (var i=0; i<loopASCIILengths.length; i++) { // walk through input lengths
-		var sectionToReplace = getArraySection(knotCircle,loopLengths[i],currentPosition);
+		var sectionToReplace = getArraySection(knotASCIICircle,
+											   loopASCIILengths[i],
+											   currentPosition);
 		sectionToReplace = sectionToReplace.reverse();
-		knotASCIICircle = putArraySection(knotASCIICircle,sectionToReplace,currentPosition);
+		knotASCIICircle = putArraySection(knotASCIICircle,
+										  sectionToReplace,
+										  currentPosition);
 		currentPosition = (currentPosition + loopASCIILengths[i] + skipSize) % masterLoopSize;
 		skipSize++;
 	}
@@ -91,17 +95,19 @@ for (var iteration=0; iteration<64; iteration++) {
 
 console.log('Sparse Hash: ' + knotASCIICircle);
 var denseASCIIHash = [];
+var denseHashString = '';
 
 for (var i=0; i<16; i++) {
 	xorTally = 0;
 	for (var j=0; j<16; j++) {
 		xorTally = xorTally ^ knotASCIICircle[i*16+j];
 	}
+	if (xorTally<16) denseHashString += '0';
+	denseHashString += xorTally.toString(16);
+
 	denseASCIIHash[i] = xorTally;	
 }
 
-console.log('Dense Hash: ' + denseASCIIHash);
+console.log('Dense Hash: ' + denseASCIIHash + '(' + denseHashString + ')');
 
-// convert to hex codes next
-
-console.log('Answer to Day 10 Part 2 = ' + answer2);
+console.log('Answer to Day 10 Part 2 = ' + answer2); //not c2f794b2eb555f7830766bf8fb65a16
