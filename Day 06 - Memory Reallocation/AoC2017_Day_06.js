@@ -9,32 +9,38 @@ console.log('*** Hello to the world...day 6 is come! ***');
 console.log('\n');
 
 var fs = require("fs");
-//var crypto = require("crypto");
+var crypto = require('crypto');
 var dailyinput = '';		// init daily input string
 //var data = fs.readFileSync('input.txt');
 var data = fs.readFileSync('test.txt');
 dailyinput = data.toString();
 
 var inputArray = new Array();  // this is the array of input that we will be manipulating
-var answerArray = new Array(); // this is the recorded history
+var inputHashes = new Set(); // this is the recorded history, once converted to strings
 var answer1 = 0;
 var answer2 = 0;
 
 var items = dailyinput.split('\t'); // splitting the input into strings by tabs
-
 console.log('Today\'s input has ' + items.length + ' items.');
 
-for (var z=0;z<items.length;z++) {       // each string contains a single integer
-	inputArray[z] = parseInt(items[z],16); // convert to an array of hex
+for (var z=0;z<items.length;z++) {      // each string contains a single integer
+	inputArray[z] = parseInt(items[z],10); // force to read as an integer
+}
+console.log('INPUT = ' + inputArray);
+
+function to16HexCodes(myItems) {
+	for (var i=0; i<16; i++) {
+		
+	}
 }
 
-console.log('INPUT = ' + inputArray);
-var count = 0;
+var name = 'braitsch';
+var hash = crypto.createHash('md5').update(name).digest('hex');
+console.log('TEST' + hash); // 9b74c9897bac770ffc029102a200c5de
 
-while (answer1 === 0) {  // while inputArray doesn't match anything in history
-	answerArray[count] = new Array();
-	answerArray[count] = inputArray; // add to history
-	count++;
+var count = 0;
+while (!(inputArray in inputHistory)) {  // while input doesn't match anything in history
+	inputHistory.add(inputArray); // add to history
 
 	for (var a=1; a<answerArray.length; a++) { // compare new inputArray with history
 		if (inputArray === answerArray[a]) { // if the current array is in the history
@@ -50,6 +56,7 @@ while (answer1 === 0) {  // while inputArray doesn't match anything in history
 	var a = inputArray.indexOf(maximum); // go to the max's index
 	console.log('at location: ' + a);
 	inputArray[a] = 0; // zero out the max
+	
 	while (maximum > 0) { // drain it out until 0
 		a++; if (a > items.length-1) a = 0;  // got to the next location with wraparound
 		inputArray[a]++; // increment where we land
@@ -67,6 +74,8 @@ while (answer1 === 0) {  // while inputArray doesn't match anything in history
 	console.log(inputArray + ' for iteration ' + answerArray.length);
 	console.log(answer1);
 } // do it again unless you found a match in history
+
+answer1 = inputHistory.length();
 
 console.log('Answer to Day 6 Part 1 = ' + answer1);
 
