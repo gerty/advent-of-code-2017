@@ -29,7 +29,7 @@ for (var z=0;z<rawInput.length;z++) {
 
 function loadZeroSet(target) {
 	for (var i=0; i<eachLine[target].length; i++) {
-		console.log(eachLine[target][i]);
+//		console.log(eachLine[target][i]);
 		if (!allthezerotalkers.has(parseInt(eachLine[target][i]))) {
 			allthezerotalkers.add(parseInt(eachLine[target][i]));
 			loadZeroSet(parseInt(eachLine[target][i]));
@@ -37,15 +37,23 @@ function loadZeroSet(target) {
 	}
 }
 
-console.log(eachLine);
+//console.log(eachLine);
 
 loadZeroSet(0);
 
 answer1 = allthezerotalkers.size;
-
-console.log('Answer to Day 12 Part 1 = ' + answer1); // Got it!
+console.log(allthezerotalkers);
+console.log('Answer to Day 12 Part 1 = ' + answer1); // Got it! 134.
 
 // Now for Part 2
 
+answer2 = 1; // Count the zero case
+
+for (var i=0; i<rawInput.length; i++) {
+	if (!(allthezerotalkers.has(i))) {
+		answer2++;
+		loadZeroSet(i);
+	}
+}
 
 console.log('Answer to Day 12 Part 2 = ' + answer2);
