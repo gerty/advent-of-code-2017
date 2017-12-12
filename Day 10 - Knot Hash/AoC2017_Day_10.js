@@ -11,9 +11,9 @@ var fs = require("fs");
 var data = fs.readFileSync('test.txt');
 const masterLoopSize = 256;
 var dailyInput = data.toString();
-
 var answer1 = 0;
 var answer2 = 0;
+
 var knotCircle = new Array();
 for (var i=0; i<masterLoopSize; i++) { knotCircle[i] = i; } // load array
 
@@ -61,10 +61,12 @@ for (var i=0; i<loopLengths.length; i++) { // walk through input lengths
 	console.log('Current Position: ' + currentPosition + ' Skip size: ' + skipSize);
 }
 
-console.log(knotCircle);
+// console.log(knotCircle);
 answer1 = knotCircle[0] * knotCircle[1]; // 52212 too high, 2928 is right!
 
 console.log('Answer to Day 10 Part 1 = ' + answer1);
+
+// Now for Part 2: Infinitely more intimidating.
 
 var loopASCIILengths = []
 var knotASCIICircle = new Array();
