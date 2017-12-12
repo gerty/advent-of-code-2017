@@ -1,4 +1,4 @@
-// Advent Of Code Puzzle #12 - 
+// Advent Of Code Puzzle #12 - Digital Plumber
 // Programming in JavaScript via command line node
 // Repo located at https://github.com/gerty/advent-of-code-2017
 // Comments and suggestions welcome
