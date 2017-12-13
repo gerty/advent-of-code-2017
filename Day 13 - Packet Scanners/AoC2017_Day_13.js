@@ -22,38 +22,17 @@ for (var z=0; z<inputInts.length; z++) {
 	inputInts[z] = inputInts[z].split(':'); 
 }
 
-console.log(inputInts);
-
-/*for (i=0; i<inputInts.length; i++) { // create firewall, populate rows in input
-	firewall[inputInts[i][0]] = Array(inputInts[i][1]);
-	firewall[inputInts[i][0]][0] = 'S'; // Scanner starts out at top of each layer
-}*/
-
-
-
-/*while (packetLocation < firewall.length) {
-	if (firewall[packetLocation][0] != 'S') packetLocation++;  // advance the packet
-
-	for (i=0; i<firewall.length; i++) {  // along the firewall
-		for (j=0; j<firewall[i].length; j++) {
-			
-		}
-	}
-}
-*/
 var firewall = [];
-
 for (var i=0; i<inputInts.length; i++) { // create firewall, populate rows in input
 	firewall[parseInt(inputInts[i][0])] = parseInt(inputInts[i][1]);  // layer depth
 }
-
-console.log(firewall);
 
 function calcPenalty(wall,delay) {
 	var picosec = delay;
 	var pen = 0;
 	var loc = 0;
 	var cleared = false;
+	
 	while (loc < wall.length) {
 		if ((picosec % (2 * (wall[loc]-1))) != 0) {
 			cleared = true;
@@ -62,9 +41,10 @@ function calcPenalty(wall,delay) {
 
 		if (!cleared) {
 			pen += (loc) * (wall[loc]);
-			console.log('penalty = ' + pen);
+			console.log('penalty = ' + pen + ' (at loc='+loc+',time='+picosec+')');
 		}
 		loc++;
+		picosec++;
 		cleared = false;	
 	}
 	return(pen);
@@ -75,6 +55,7 @@ function isPenalty(wall,delay) {
 	var pen = 0;
 	var loc = 0;
 	var cleared = false;
+	
 	while (loc < wall.length) {
 		if ((picosec % (2 * (wall[loc]-1))) != 0) {
 			cleared = true;
@@ -86,6 +67,7 @@ function isPenalty(wall,delay) {
 			return(false);
 		}
 		loc++;
+		picosec++;
 		cleared = false;	
 	}
 	return(true);
@@ -98,8 +80,9 @@ var thisTry = 0;
 while (!found) {
 	if (isPenalty(firewall,thisTry)) {
 		answer2 = thisTry;
+		found=true;
 	}
-	found++;
+	thisTry++;
 }
 
 console.log('Answer to Day 13 Part 1 = ' + answer1);
