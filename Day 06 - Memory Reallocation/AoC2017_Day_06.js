@@ -1,82 +1,57 @@
-// Advent Of Code Puzzle #6 - 
+// Advent Of Code Puzzle #6 - Memory Reallocation
 // Programming in JavaScript via command line node
 // Repo located at https://github.com/gerty/advent-of-code-2017
 // Comments and suggestions welcome
 
-// 12/6/17 - Happy Holidays! Learning a lot so far, but down to 3 on the leaderboard.
-console.log('\n');
+// Happy Holidays! Learning a lot so far, but this one is taking a while.
 console.log('*** Hello to the world...day 6 is come! ***');
-console.log('\n');
 
 var fs = require("fs");
 var crypto = require('crypto');
 var dailyinput = '';		// init daily input string
 //var data = fs.readFileSync('input.txt');
-var data = fs.readFileSync('test.txt');
+//var data = fs.readFileSync('test.txt');
+var data = fs.readFileSync('input2.txt');
 dailyinput = data.toString();
 
-var inputArray = new Array();  // this is the array of input that we will be manipulating
-var inputHashes = new Set(); // this is the recorded history, once converted to strings
 var answer1 = 0;
 var answer2 = 0;
 
 var items = dailyinput.split('\t'); // splitting the input into strings by tabs
 console.log('Today\'s input has ' + items.length + ' items.');
 
-for (var z=0;z<items.length;z++) {      // each string contains a single integer
-	inputArray[z] = parseInt(items[z],10); // force to read as an integer
+var inputArray = new Array();  // this is the array of input that we will be manipulating
+for (var i=0;i<items.length;i++) {      // each string contains a single integer
+	inputArray[i] = parseInt(items[i],10); // force to read as an integer
 }
 console.log('INPUT = ' + inputArray);
 
-function to16HexCodes(myItems) {
-	for (var i=0; i<16; i++) {
-		
+function toHexChars(myItems) {
+	myChars = '';
+	for (var i=0; i<myItems.length; i++) {
+		myChars += myItems[i].toString(16);
 	}
+	return(myChars);
 }
 
-var name = 'braitsch';
-var hash = crypto.createHash('md5').update(name).digest('hex');
-console.log('TEST' + hash); // 9b74c9897bac770ffc029102a200c5de
+var inputHashes = new Set(); // this is the recorded history, once converted to strings
+var thisHash = crypto.createHash('md5').update(toHexChars(inputArray)).digest('hex');
 
-var count = 0;
-while (!(inputArray in inputHistory)) {  // while input doesn't match anything in history
-	inputHistory.add(inputArray); // add to history
-
-	for (var a=1; a<answerArray.length; a++) { // compare new inputArray with history
-		if (inputArray === answerArray[a]) { // if the current array is in the history
-			console.log('Found that ' + answerArray[a] + ' is in the history.');
-			answer1 = count; // the answer would be the length of history
-		}
-	}
+while (inputHashes.has(thisHash) === false) {  // input not in history
+	inputHashes.add(thisHash); // add to history
 
 	// redistribute
-	console.log('History looks like this now: ' + answerArray);
 	var maximum = Math.max(...inputArray); // find the max
-	console.log('MAX: ' + maximum);
 	var a = inputArray.indexOf(maximum); // go to the max's index
-	console.log('at location: ' + a);
 	inputArray[a] = 0; // zero out the max
-	
 	while (maximum > 0) { // drain it out until 0
 		a++; if (a > items.length-1) a = 0;  // got to the next location with wraparound
 		inputArray[a]++; // increment where we land
 		maximum--; // one more down
 	}
-	
-	console.log(inputArray);
-	console.log(answerArray);
-	
-// ideas: one to put each answer in a hash table, then look up to see if anything is there
-// 		  another idea is to use a linked list to store the value and pointer to the next
-//		  third idea to store state in strings of hex
-
-	// done redistributing when original maximum=0 and all are increased by 1
-	console.log(inputArray + ' for iteration ' + answerArray.length);
-	console.log(answer1);
+	thisHash = crypto.createHash('md5').update(toHexChars(inputArray)).digest('hex');
 } // do it again unless you found a match in history
+console.log(inputArray);
+answer2 = inputHashes.size;
 
-answer1 = inputHistory.length();
-
-console.log('Answer to Day 6 Part 1 = ' + answer1);
-
-console.log('\rAnswer to Day 6 Part 2 = ' + answer2);
+console.log('Answer to Day 6 Part 2 = ' + answer2);
