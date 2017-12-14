@@ -1,1 +1,1 @@
-TEST DATA HERE
+se,sw,se,sw,sw
