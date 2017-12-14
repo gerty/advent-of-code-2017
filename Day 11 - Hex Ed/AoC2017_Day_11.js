@@ -1,9 +1,9 @@
-// Advent Of Code Puzzle #11 - 
+// Advent Of Code Puzzle #11 - Hex Ed
 // Programming in JavaScript via command line node
 // Repo located at https://github.com/gerty/advent-of-code-2017
 // Comments and suggestions welcome
 
-// Happy Holidays! Placeholder time... hoping to catch up this weekend
+// Happy Holidays! Oil change taking too long. No problem... catching up on Day 11.
 console.log('Hello to the world...day 11 is come!');
 
 var fs = require("fs");
@@ -20,6 +20,6 @@ var inputInts = dailyInput.split(','); // splitting the input into lines by comm
 // then convert to an array of integers
 for (var z=0;z<inputInts.length;z++) { inputInts[z] = parseInt(inputInts[z]); }
 
-console.log('Answer to Day 10 Part 1 = ' + answer1);
+console.log('Answer to Day 11 Part 1 = ' + answer1);
 // Now for Part 2
-console.log('Answer to Day 10 Part 2 = ' + answer2);
+console.log('Answer to Day 11 Part 2 = ' + answer2);
