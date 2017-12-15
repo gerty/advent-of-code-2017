@@ -18,14 +18,16 @@ const factorGenB = 48271;
 const judgeDivide = 2147483647;
 var answer1 = 0;
 var answer2 = 0;
+//	seedGenA = exampleSeedGenA;
+//	seedGenB = exampleSeedGenB;
 
-for (var z=0;z<5;z++) {
-	exampleSeedGenA *= 16807;
-	exampleSeedGenB *= 48271;
-	exampleSeedGenA %= 2147483647;
-	exampleSeedGenB %= 2147483647;
-	console.log(exampleSeedGenA + '\t' + exampleSeedGenB);
-	if (((exampleSeedGenA >>> 0) % 65536) === ((exampleSeedGenB >>> 0) % 65536)) {
+for (var z=0;z<40000000;z++) {
+	seedGenA *= 16807;
+	seedGenB *= 48271;
+	seedGenA %= 2147483647;
+	seedGenB %= 2147483647;
+//	console.log(seedGenA + '\t' + seedGenB);
+	if (((seedGenA >>> 0) % 65536) === ((seedGenB >>> 0) % 65536)) {
 		answer1++;
 		console.log('Example has match #' + answer1 + ' at iteration: ' + z);
 	}
