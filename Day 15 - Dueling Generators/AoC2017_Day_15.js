@@ -19,14 +19,15 @@ const judgeDivide = 2147483647;
 var answer1 = 0;
 var answer2 = 0;
 
-for (var z=0;z<4000000;z++) {
+for (var z=0;z<5;z++) {
 	exampleSeedGenA *= 16807;
 	exampleSeedGenB *= 48271;
 	exampleSeedGenA %= 2147483647;
 	exampleSeedGenB %= 2147483647;
-	if ((exampleSeedGenA | 65535) === (exampleSeedGenB | 65535)) {
+	console.log(exampleSeedGenA + '\t' + exampleSeedGenB);
+	if (((exampleSeedGenA >>> 0) % 65536) === ((exampleSeedGenB >>> 0) % 65536)) {
 		answer1++;
-		console.log('Match at iteration: ' + z);
+		console.log('Example has match #' + answer1 + ' at iteration: ' + z);
 	}
 }
 
