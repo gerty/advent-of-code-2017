@@ -13,7 +13,7 @@ var data = fs.readFileSync('test.txt');
 var dailyInput = data.toString();
 var answer1 = 0;
 var answer2 = 0;
-const masterLoopSize = 128;
+const masterLoopSize = 256;
 
 // How long is the input? A useful thing to know.
 console.log('Today\'s input has ' + dailyInput.length + ' characters.');
@@ -90,15 +90,15 @@ function denseFromSparse(sparseHash) {
 	return(denseHashString);
 }
 
-function Hex2Bin(n){return parseInt(n,16).toString(2)}
-
 for (z=0; z<128; z++) {
 	gridInput[z] = dailyInput + '-' + z.toString();
 	hashInput[z] = giveKnotHash(gridInput[z]);
-	console.log('Dense Hash: ' + denseFromSparse(hashInput[z]));
+	var denseHash = denseFromSparse(hashInput[z]);
 	var bitcount = [];
-	//bitcount = parseInt(denseFromSparse(hashInput[z])).toString(2).split(""); // fix this
-	bitcount = Hex2Bin(denseFromSparse(hashInput[z]));
+	console.log(denseHash);
+	for (var i=0; i<denseHash.length; i++) {
+		bitcount += parseInt(denseHash[i],16).toString(2);
+	}
 	console.log(bitcount);
 	//answer1 += bitcount.sort().join("").toString().length; // fix all this...
 	answer1 += bitcount.split('1').length;
