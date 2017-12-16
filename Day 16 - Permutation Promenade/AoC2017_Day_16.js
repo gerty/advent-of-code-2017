@@ -17,9 +17,15 @@ var answer2 = 0;
 console.log('Today\'s input has ' + dailyInput.length + ' characters.');
 
 var inputInts = dailyInput.split(','); // splitting the input into lines by comma
-// then convert to an array of integers
-for (var z=0;z<inputInts.length;z++) { inputInts[z] = parseInt(inputInts[z]); }
 
-console.log('Answer to Day 11 Part 1 = ' + answer1);
+for (var z=0;z<inputInts.length;z++) {
+	var toProcess = [];
+	toProcess = inputInts[z].split('/'); 
+	console.log(toProcess);
+}
+
+
+
+console.log('Answer to Day 16 Part 1 = ' + answer1);
 // Now for Part 2
-console.log('Answer to Day 11 Part 2 = ' + answer2);
+console.log('Answer to Day 16 Part 2 = ' + answer2);
