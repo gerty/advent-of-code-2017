@@ -12,6 +12,7 @@ var data = fs.readFileSync('input.txt');
 var dailyInput = data.toString();
 var answer1 = 0;
 var answer2 = 0;
+var initialLine = 'abcdefghijklmnop';
 
 // How long is the input? A useful thing to know.
 console.log('Today\'s input has ' + dailyInput.length + ' characters.');
