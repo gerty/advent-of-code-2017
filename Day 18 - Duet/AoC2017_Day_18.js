@@ -1,4 +1,4 @@
-// Advent Of Code Puzzle #18 - 
+// Advent Of Code Puzzle #18 - Duet
 // Programming in JavaScript via command line node
 // Repo located at https://github.com/gerty/advent-of-code-2017
 // Comments and suggestions welcome
