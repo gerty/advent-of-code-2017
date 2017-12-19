@@ -16,9 +16,30 @@ var answer2 = 0;
 // How long is the input? A useful thing to know.
 console.log('Today\'s input has ' + dailyInput.length + ' characters.');
 
-var inputInts = dailyInput.split(','); // splitting the input into lines by comma
-// then convert to an array of integers
-for (var z=0;z<inputInts.length;z++) { inputInts[z] = parseInt(inputInts[z]); }
+var inputs = dailyInput.split(' '); // splitting the input directions by spaces
+
+var nCoord = 0;
+var eCoord = 0;
+
+for (var z=0;z<inputs.length;z++) { 
+	if (inupts[z] === 'n') nCoord++;
+	if (inupts[z] === 'ne') { nCoord++; eCoord++; }
+	if (inupts[z] === 'se') eCoord += 1;
+	if (inupts[z] === 's') nCoord--;
+	if (inupts[z] === 'sw') { nCoord--; eCoord--; }
+	if (inupts[z] === 'nw') eCoord i= 1;
+}
+
+// Calculate distance with process shown here: 
+// http://3dmdesign.com/development/hexmap-coordinates-the-easy-way
+
+dx = eCoord;
+dy = nCoord;
+dd = eCoord - nCoord;
+
+if ((dx>dy) && (dx>dd)) answer1 = Math.abs(dx);
+if ((dy>dx) && (dy>dd)) answer1 = Math.abs(dy);
+if ((dd>dy) && (dd>dx)) answer1 = Math.abs(dd);
 
 console.log('Answer to Day 11 Part 1 = ' + answer1);
 // Now for Part 2
