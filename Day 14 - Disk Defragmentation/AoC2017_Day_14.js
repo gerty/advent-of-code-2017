@@ -76,13 +76,12 @@ function denseFromSparse(sparseHash) {
 	var denseASCIIHash = [];
 	var denseHashString = '';
 
-	for (var i=0; i<8; i++) {
+	for (var i=0; i<16; i++) {
 		xorTally = 0;
-		for (var j=0; j<8; j++) {
+		for (var j=0; j<16; j++) {
 			xorTally = xorTally ^ sparseHash[i*16+j];
 		}
-		if (xorTally<16) denseHashString += '0';
-		denseHashString += xorTally.toString(16);
+		denseHashString += ('00' + xorTally.toString(16)).slice(-2);
 
 		denseASCIIHash[i] = xorTally;	
 //		console.log('xorTally: ' + denseASCIIHash[i]);
@@ -92,21 +91,29 @@ function denseFromSparse(sparseHash) {
 
 for (z=0; z<128; z++) {
 	gridInput[z] = dailyInput + '-' + z.toString();
+	console.log(gridInput[z]);
+
 	hashInput[z] = giveKnotHash(gridInput[z]);
+	// console.log(hashInput[z]);
+
 	var denseHash = denseFromSparse(hashInput[z]);
-	var bitcount = [];
 	console.log(denseHash);
+
+	var bitcount = [];
 	for (var i=0; i<denseHash.length; i++) {
-		bitcount += parseInt(denseHash[i],16).toString(2);
+		bitcount += ('0000' + parseInt(denseHash[i],16).toString(2)).slice(-4);
 	}
 	console.log(bitcount);
-	//answer1 += bitcount.sort().join("").toString().length; // fix all this...
-	answer1 += bitcount.split('1').length;
+	
+	answer1 += (bitcount.split('1').length-1);
+	console.log((bitcount.split('1').length-1) + ' bits found');
+	
+	console.log('Test input: ' + denseFromSparse(giveKnotHash('230,1,2,221,97,252,168,169,57,99,0,254,181,255,235,167')));
 }
 
 //console.log(gridInput);
 //console.log(hashInput);
 
-console.log('Answer to Day 14 Part 1 = ' + answer1);
+console.log('Answer to Day 14 Part 1 = ' + answer1); // 4094 too low
 // Now for Part 2
 console.log('Answer to Day 14 Part 2 = ' + answer2);
