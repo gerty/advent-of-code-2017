@@ -8,8 +8,8 @@ console.log('Hello to the world...day 14 is come!');
 
 var fs = require("fs");
 var crypto = require("crypto");
-//var data = fs.readFileSync('input.txt');
-var data = fs.readFileSync('test.txt');
+var data = fs.readFileSync('input.txt');
+//var data = fs.readFileSync('test.txt');
 var dailyInput = data.toString();
 var answer1 = 0;
 var answer2 = 0;
@@ -52,6 +52,7 @@ function giveKnotHash(myInputString) {
 	for (var i=0; i<myInputString.length; i++) {
 		loopASCIILengths[i] = myInputString.charCodeAt(i);
 	}
+	loopASCIILengths = loopASCIILengths.concat(17,31,73,47,23); // interesting add...
 
 	for (var iteration=0; iteration<64; iteration++) {
 		for (var i=0; i<loopASCIILengths.length; i++) { // walk through input lengths
@@ -108,7 +109,8 @@ for (z=0; z<128; z++) {
 	answer1 += (bitcount.split('1').length-1);
 	console.log((bitcount.split('1').length-1) + ' bits found');
 	
-	console.log('Test input: ' + denseFromSparse(giveKnotHash('230,1,2,221,97,252,168,169,57,99,0,254,181,255,235,167')));
+	console.log('Test input: ' + 
+		denseFromSparse(giveKnotHash('230,1,2,221,97,252,168,169,57,99,0,254,181,255,235,167')));
 }
 
 //console.log(gridInput);
