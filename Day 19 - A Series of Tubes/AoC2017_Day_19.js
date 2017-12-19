@@ -30,13 +30,19 @@ for (var i=1; i<inputParsed.length-1; i++) {
 			(inputParsed[i-1][j] === '|') &&
 			(inputParsed[i+1][j] === '|')) {
 				count2++;
-				console.log('HERE');
+			}
+		if ((inputParsed[i][j] === '|') && 
+			(inputParsed[i][j-1] === '-') &&
+			(inputParsed[i][j+1] === '-')) {
+				count2++;
 			}
 	}
 }
 
 console.log(count2);
-answer2 = 15049 + 536 + count2;
+
+answer2 = 14849 + count2 + 1;
+// raw chars + underpasses + R special case (hides an underpass)
 
 console.log('Answer to Day 19 Part 1 = ' + answer1);
 // Now for Part 2
