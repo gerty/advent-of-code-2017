@@ -16,18 +16,18 @@ var answer2 = 0;
 // How long is the input? A useful thing to know.
 console.log('Today\'s input has ' + dailyInput.length + ' characters.');
 
-var inputs = dailyInput.split(' '); // splitting the input directions by spaces
+var inputs = dailyInput.split(','); // splitting the input directions by spaces
 
 var nCoord = 0;
 var eCoord = 0;
 
 for (var z=0;z<inputs.length;z++) { 
-	if (inupts[z] === 'n') nCoord++;
-	if (inupts[z] === 'ne') { nCoord++; eCoord++; }
-	if (inupts[z] === 'se') eCoord += 1;
-	if (inupts[z] === 's') nCoord--;
-	if (inupts[z] === 'sw') { nCoord--; eCoord--; }
-	if (inupts[z] === 'nw') eCoord i= 1;
+	if (inputs[z] === 'n') nCoord++;
+	if (inputs[z] === 'ne') { nCoord++; eCoord++; }
+	if (inputs[z] === 'se') eCoord += 1;
+	if (inputs[z] === 's') nCoord--;
+	if (inputs[z] === 'sw') { nCoord--; eCoord--; }
+	if (inputs[z] === 'nw') eCoord += 1;
 }
 
 // Calculate distance with process shown here: 
