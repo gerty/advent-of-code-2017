@@ -21,26 +21,28 @@ var inputs = dailyInput.split(','); // splitting the input directions by spaces
 var nCoord = 0;
 var eCoord = 0;
 
+// Calculating distance with process shown here: 
+// http://3dmdesign.com/development/hexmap-coordinates-the-easy-way
+
 for (var z=0;z<inputs.length;z++) { 
 	if (inputs[z] === 'n') nCoord++;
 	if (inputs[z] === 'ne') { nCoord++; eCoord++; }
 	if (inputs[z] === 'se') eCoord += 1;
 	if (inputs[z] === 's') nCoord--;
 	if (inputs[z] === 'sw') { nCoord--; eCoord--; }
-	if (inputs[z] === 'nw') eCoord += 1;
+	if (inputs[z] === 'nw') eCoord -= 1;
+
+	dx = Math.abs(eCoord);
+	dy = Math.abs(nCoord);
+	dd = Math.abs(nCoord - eCoord);
+
+	if ((dx>dy) && (dx>dd)) answer1 = Math.abs(dx);
+	if ((dy>dx) && (dy>dd)) answer1 = Math.abs(dy);
+	if ((dd>dy) && (dd>dx)) answer1 = Math.abs(dd);
+
+	if (answer1 > answer2) answer2 = answer1;
 }
 
-// Calculate distance with process shown here: 
-// http://3dmdesign.com/development/hexmap-coordinates-the-easy-way
-
-dx = eCoord;
-dy = nCoord;
-dd = eCoord - nCoord;
-
-if ((dx>dy) && (dx>dd)) answer1 = Math.abs(dx);
-if ((dy>dx) && (dy>dd)) answer1 = Math.abs(dy);
-if ((dd>dy) && (dd>dx)) answer1 = Math.abs(dd);
-
-console.log('Answer to Day 11 Part 1 = ' + answer1);
+console.log('Answer to Day 11 Part 1 = ' + answer1); // 2567, 2881 too high
 // Now for Part 2
 console.log('Answer to Day 11 Part 2 = ' + answer2);
