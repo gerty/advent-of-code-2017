@@ -39,6 +39,9 @@ for (var i=1; i<inputParsed.length-1; i++) {
 	}
 }
 
+// Approach: Find total non-whitespace characters (14849), 
+//           add underpasses by recognition, and add one for when letters got in the way.
+
 console.log(count2);
 
 answer2 = 14849 + count2 + 1;
