@@ -14,6 +14,8 @@ var dailyInput = data.toString();
 var answer1 = 0;
 var answer2 = 0;
 const masterLoopSize = 256;
+var bitarray[];
+//for (z=0;z<128;z++) { bitarray[z] = []; }
 
 // How long is the input? A useful thing to know.
 console.log('Today\'s input has ' + dailyInput.length + ' characters.');
@@ -104,18 +106,17 @@ for (z=0; z<128; z++) {
 	for (var i=0; i<denseHash.length; i++) {
 		bitcount += ('0000' + parseInt(denseHash[i],16).toString(2)).slice(-4);
 	}
-	console.log(bitcount);
-	
+	bitarray[z] = bitcount;
 	answer1 += (bitcount.split('1').length-1);
 	console.log((bitcount.split('1').length-1) + ' bits found');
-	
-	console.log('Test input: ' + 
-		denseFromSparse(giveKnotHash('230,1,2,221,97,252,168,169,57,99,0,254,181,255,235,167')));
 }
 
 //console.log(gridInput);
 //console.log(hashInput);
 
-console.log('Answer to Day 14 Part 1 = ' + answer1); // 4094 too low
+console.log('Answer to Day 14 Part 1 = ' + answer1); // 4094 too low, 8204 is it!
 // Now for Part 2
 console.log('Answer to Day 14 Part 2 = ' + answer2);
+// write an interative clearAdjacent function to look down all of the paths and eat up
+// adjacent ones.
+
