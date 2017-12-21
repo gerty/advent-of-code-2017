@@ -10,8 +10,13 @@ var fs = require("fs");
 var data = fs.readFileSync('input.txt');
 //var data = fs.readFileSync('test.txt');
 var dailyInput = data.toString();
+
+const maxIterations = 5;
 var answer1 = 0;
 var answer2 = 0;
+ruleInput = [];
+ruleOutput = [];
+myBigSquare = [];
 
 // How long is the input? A useful thing to know.
 console.log('Today\'s input has ' + dailyInput.length + ' characters.');
@@ -19,9 +24,55 @@ console.log('Today\'s input has ' + dailyInput.length + ' characters.');
 var inputParsed = dailyInput.split('\n'); // splitting the input into lines by newline
 
 for (var z=0; z<inputParsed.length; z++) {
-	inputParsed[z] = inputParsed[z].split(' '); 
+	inputParsed[z] = inputParsed[z].split(' ');
+	ruleInput[z] = inputParsed[z][0].split('/').join(); // take out the '/' from string
+	ruleOutput[z] = inputParsed[z][2].split('/').join();	
+}           // now we have our input mapping rules
+
+function rotateCW(inSquare, times) {
+// rotate a square 'times' number of times
 }
-console.log(inputParsed);
+
+function flipSquare(inSquare) {
+// take an array and flip it over the X axis
+}
+
+// Turning this into a map, for ALL possibilities:
+var ruleMap = new Map();
+for (var m=0; m<ruleInput.length; m++) {
+	for (rot=0; rot<4; rot++) {  // rotate it 'rot' times and inter into solution map
+		ruleMap.set(rotateCW(ruleInput[m],rot),ruleOutput[m]);
+		ruleMap.set(flipSquare(rotateCW(ruleInput[m],rot)),ruleOutput[m]);
+		console.log(ruleMap.entries());
+	}
+}
+
+
+function processSquare(inSquare) {
+	// take a string of 4 or 9 chars, and return the square based on my input
+	// rules data are in ruleInput and ruleOutput (global arrays)
+	
+}
+
+function insertSquare(littleSquare, bigSquare, x, y) {
+	// takes a little array and puts it in to a big array at x,y
+}
+
+var iteration = 1;
+while (iteration <= maxIterations) {  // look at const maxIterations to know when to stop
+	var newSquare = [];
+	if (myBigSquare.length % 2 === 0) {
+		for (i=0; i<myBigSquare.length/2;i+=2) {
+			for (j=0; j<myBigSquare.length/2; j+=2) {
+				
+			}
+		}
+	}
+	else {
+
+	}
+	return myBigSquare = newSquare;
+}
 
 answer1 = 0;
 
