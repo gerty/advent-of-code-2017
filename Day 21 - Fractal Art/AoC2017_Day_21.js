@@ -71,16 +71,20 @@ function insertSquare(littleSquare, bigSquare, x, y) {
 
 var iteration = 1;
 while (iteration <= maxIterations) {  // look at const maxIterations to know when to stop
-	var newSquare = [];
-	if (myBigSquare.length % 2 === 0) {
+	var newSquare = [];  // this is where the resultant square will go
+	if (myBigSquare.length % 2 === 0) {  // is it a multiple of 2
 		for (i=0; i<myBigSquare.length/2;i+=2) {
 			for (j=0; j<myBigSquare.length/2; j+=2) {
 				
 			}
 		}
 	}
-	else {
-
+	else {  // it must be a multiple of 3
+		for (i=0; i<myBigSquare.length/2;i+=2) {
+			for (j=0; j<myBigSquare.length/2; j+=2) {
+				
+			}
+		}
 	}
 	return myBigSquare = newSquare;
 }
