@@ -14,7 +14,7 @@ var answer1 = 0;
 var answer2 = 0;
 
 // create a prototype object for particles - HOW?
-var particles = {}; // create array for particle objects
+var particles = []; // create array for particle objects
 
 var inputParsed = dailyInput.split('\n'); // splitting the input into lines by newline
 console.log(inputParsed);
@@ -22,18 +22,13 @@ console.log(inputParsed);
 // then load an array of particle objects
 for (var z=0; z<inputParsed.length; z++) {
 	var pva = inputParsed[z]; // get each line
-	particle[z] = [];   // init array for each line
-	pInt[z] = [];   // init number archive for each line
-	// get the string
-	particle[z][0] = pva.substring(pva.lastIndexOf("<")+1,pva.lastIndexOf(">"));
+	var a = pva.substring(pva.lastIndexOf("<")+1,pva.lastIndexOf(">"));
 	pva = pva.substring(0,pva.lastIndexOf("<"));  // cut it off
-	// get the string
-	particle[z][1] = pva.substring(pva.lastIndexOf("<")+1,pva.lastIndexOf(">"));
+	var v = pva.substring(pva.lastIndexOf("<")+1,pva.lastIndexOf(">"));
 	pva = pva.substring(0,pva.lastIndexOf("<"));  // cut it off
-	// get the string
-	particle[z][2] = pva.substring(pva.lastIndexOf("<")+1,pva.lastIndexOf(">"));
+	var p = pva.substring(pva.lastIndexOf("<")+1,pva.lastIndexOf(">"));
 	
-	pInt[z][0] = parseInt(particle[z].split(','));
+	particlespInt[z][0] = parseInt(particle[z].split(','));
 	pInt[z][1] = parseInt(particle[z][1].split(','));
 	pInt[z][2] = parseInt(particle[z][2].split(','));
 	console.log('  p = ' + particle[z][0] + 
