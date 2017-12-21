@@ -29,23 +29,34 @@ for (var z=0; z<inputParsed.length; z++) {
 	ruleOutput[z] = inputParsed[z][2].split('/').join();	
 }           // now we have our input mapping rules
 
-function rotateCW(inSquare, times) {
-// rotate a square 'times' number of times
+function rotateCW(inSquare, times) { // rotate a square 'times' number of times
+	var localArray = [];
+	var borderLen = Math.sqrt(inSquare.length);
+	console.log('Rotating square of border length: ' + borderLen);
+	for (var i=0; i<borderLen; i++) {
+		//cycle through and rotate the thing
+	}
+	return localArray;
 }
 
-function flipSquare(inSquare) {
-// take an array and flip it over the X axis
+function flipSquare(inSquare) {  // take an array and flip it over the X axis
+	var localArray = [];
+	var borderLen = Math.sqrt(inSquare.length);
+	console.log('Flipping square of border length: ' + borderLen);
+	for (var i=0; i<borderLen; i++) {
+		//cycle through and flip the thing
+	}
 }
 
 // Turning this into a map, for ALL possibilities:
 var ruleMap = new Map();
 for (var m=0; m<ruleInput.length; m++) {
-	for (rot=0; rot<4; rot++) {  // rotate it 'rot' times and inter into solution map
-		ruleMap.set(rotateCW(ruleInput[m],rot),ruleOutput[m]);
-		ruleMap.set(flipSquare(rotateCW(ruleInput[m],rot)),ruleOutput[m]);
-		console.log(ruleMap.entries());
+	for (rot=0; rot<4; rot++) {  // rotate it 'rot' times and enter into solution map
+		ruleMap.set(rotateCW(ruleInput[m],rot),ruleOutput[m]); // non-flipped
+		ruleMap.set(flipSquare(rotateCW(ruleInput[m],rot)),ruleOutput[m]);  // flipped
 	}
 }
+console.log(ruleMap.entries()); // this should show all 8 iterations of ruleInput
 
 
 function processSquare(inSquare) {
