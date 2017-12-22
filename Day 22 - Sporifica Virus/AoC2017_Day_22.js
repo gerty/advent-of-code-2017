@@ -6,35 +6,32 @@
 // Happy Holidays! Happy first full day fo winter. It's 70 degF in Houston btw!
 console.log('Hello to the world...day 22 is come!');
 
-const gridSize = 20;
+const gridSize = 207;
 var fs = require("fs");
-//var data = fs.readFileSync('input.txt');
-var data = fs.readFileSync('test.txt');
+var data = fs.readFileSync('input.txt');
+//var data = fs.readFileSync('test.txt');
 var dailyInput = data.toString();
 var answer1 = 0;
 var answer2 = 0;
 var grid = [gridSize];  // make a grid that allows movement by gridSize in any direction
-for (var i=0; i<gridSize; i++) {
-	grid[i] = [''];
-	for (var j=0; j<gridSize; j++) {
-		grid[i] = grid[i] + '.';
+for (var y=0; y<gridSize; y++) {
+	grid[y] = [''];
+	for (var x=0; x<gridSize; x++) {
+		grid[y] = grid[y] + '.';
 	}
 }
 
-// How long is the input? A useful thing to know.
-console.log('Today\'s input has ' + dailyInput.length + ' characters.');
-
 var inputParsed = dailyInput.split('\n'); // splitting the input into lines by newline
+console.log(inputParsed);
 
-var dx = Math.floor(gridSize/2) - Math.floor(inputParsed.length/2);
+var dx = Math.floor(gridSize/2) - Math.floor(inputParsed.length/2); // find top-left
 var dy = Math.floor(gridSize/2) - Math.floor(inputParsed.length/2);
-console.log('dx = ' + dx);
-console.log('dy = ' + dy);
+console.log('dx = ' + dx + ' dy = ' + dy);
 
-for (var i=0; i<inputParsed.length; i++) {
-	for (var j=0; j<inputParsed[i].length; j++) {
-		grid[dx+i] = grid[dx+i].substring(0,dy+j) + inputParsed[i][j] + 
-					 grid[dx+i].substring(dy+ j + 1);
+for (var y=0; y<inputParsed.length; y++) {
+	for (var x=0; x<inputParsed[y].length; x++) {
+		grid[dy+y] = grid[dy+y].substring(0,dx+x) + inputParsed[y][x] + 
+					 grid[dy+y].substring(dx+x+1);
 	}
 }
 
@@ -43,20 +40,8 @@ var hereY = Math.floor(gridSize/2);
 var facing = 'U';
 var activity = 0;
 
-while (activity<70) {
-	if ((grid[hereX][hereY] === '.')) {  // clean, so turn left
-		switch (facing) { 
-			case 'U' : {facing = 'L';} break;
-			case 'R' : {facing = 'U';} break;
-			case 'D' : {facing = 'R';} break;
-			case 'L' : {facing = 'D';} break;
-			default : {}
-		}
-		grid[hereX] = grid[hereX].substring(0,hereY) + '#' + 
-					  grid[hereX].substring(hereY + 1);		
-		answer1++;
-	}
-	else {  // infected, so turn right
+while (activity<10000) {
+	if ((grid[hereY][hereX] === '#')) {  // infected, so turn right
 		switch (facing) { 
 			case 'U' : {facing = 'R';} break;
 			case 'R' : {facing = 'D';} break;
@@ -64,8 +49,20 @@ while (activity<70) {
 			case 'L' : {facing = 'U';} break;
 			default : {}
 		}
-		grid[hereX] = grid[hereX].substring(0,hereY) + '.' + 
-					  grid[hereX].substring(hereY + 1);
+		grid[hereY] = grid[hereY].substring(0,hereX) + ',' + 
+					  grid[hereY].substring(hereX+1);		
+	}
+	else {  // clean, so turn left
+		switch (facing) { 
+			case 'U' : {facing = 'L';} break;
+			case 'R' : {facing = 'U';} break;
+			case 'D' : {facing = 'R';} break;
+			case 'L' : {facing = 'D';} break;
+			default : {}
+		}
+		grid[hereY] = grid[hereY].substring(0,hereX) + '#' + 
+					  grid[hereY].substring(hereX+1);
+		answer1++;
 	}
 	
 	switch (facing) {  // now move forward one step
@@ -77,9 +74,10 @@ while (activity<70) {
 	}
 	activity++;
 
-	for (var i=0; i<grid.length; i++) {
-		console.log(grid[i]);
+	for (var y=0; y<grid.length; y++) {
+		console.log(grid[y]);
 	}
+	console.log('-X=' + hereX + '--Y=' + hereY + '--Facing=' + facing + '---');
 }
 
 console.log('Answer to Day 22 Part 1 = ' + answer1); 
