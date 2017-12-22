@@ -1,4 +1,4 @@
-// Advent Of Code Puzzle #14 - Disk Defragmentation
+// Advent Of Code Puzzle #22 - Disk Defragmentation
 // Programming in JavaScript via command line node
 // Repo located at https://github.com/gerty/advent-of-code-2017
 // Comments and suggestions welcome
@@ -6,7 +6,7 @@
 // Happy Holidays! Happy first full day fo winter. It's 70 degF in Houston btw!
 console.log('Hello to the world...day 22 is come!');
 
-const gridSize = 30;
+const gridSize = 20;
 var fs = require("fs");
 //var data = fs.readFileSync('input.txt');
 var data = fs.readFileSync('test.txt');
@@ -15,9 +15,9 @@ var answer1 = 0;
 var answer2 = 0;
 var grid = [gridSize];  // make a grid that allows movement by gridSize in any direction
 for (var i=0; i<gridSize; i++) {
-	grid[i] = [];
+	grid[i] = [''];
 	for (var j=0; j<gridSize; j++) {
-		grid[i][j] = false;
+		grid[i] = grid[i] + '.';
 	}
 }
 
@@ -33,7 +33,8 @@ console.log('dy = ' + dy);
 
 for (var i=0; i<inputParsed.length; i++) {
 	for (var j=0; j<inputParsed[i].length; j++) {
-		if (inputParsed[i][j] === '#') grid[dx+i][dy+j] = true;
+		grid[dx+i] = grid[dx+i].substring(0,dy+j) + inputParsed[i][j] + 
+					 grid[dx+i].substring(dy+ j + 1);
 	}
 }
 
@@ -43,7 +44,7 @@ var facing = 'U';
 var activity = 0;
 
 while (activity<70) {
-	if ((grid[hereX][hereY] === false)) {  // clean, so turn left
+	if ((grid[hereX][hereY] === '.')) {  // clean, so turn left
 		switch (facing) { 
 			case 'U' : {facing = 'L';} break;
 			case 'R' : {facing = 'U';} break;
@@ -51,7 +52,8 @@ while (activity<70) {
 			case 'L' : {facing = 'D';} break;
 			default : {}
 		}
-		grid[hereX][hereY] = true; // infect square
+		grid[hereX] = grid[hereX].substring(0,hereY) + '#' + 
+					  grid[hereX].substring(hereY + 1);		
 		answer1++;
 	}
 	else {  // infected, so turn right
@@ -62,7 +64,8 @@ while (activity<70) {
 			case 'L' : {facing = 'U';} break;
 			default : {}
 		}
-		grid[hereX][hereY] = false;
+		grid[hereX] = grid[hereX].substring(0,hereY) + '.' + 
+					  grid[hereX].substring(hereY + 1);
 	}
 	
 	switch (facing) {  // now move forward one step
@@ -73,13 +76,13 @@ while (activity<70) {
 		default : {}
 	}
 	activity++;
+
+	for (var i=0; i<grid.length; i++) {
+		console.log(grid[i]);
+	}
 }
 
-for (var i=0; i<grid.length; i++) {
-	console.log(grid[i]);
-}
-
-console.log('Answer to Day 22 Part 1 = ' + answer1); // 4094 too low, 8204 is it!
+console.log('Answer to Day 22 Part 1 = ' + answer1); 
 // Now for Part 2
 console.log('Answer to Day 22 Part 2 = ' + answer2);
 
