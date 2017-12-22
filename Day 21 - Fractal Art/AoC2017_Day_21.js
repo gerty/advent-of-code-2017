@@ -14,8 +14,8 @@ var dailyInput = data.toString();
 const maxIterations = 5;
 var answer1 = 0;
 var answer2 = 0;
-ruleInput = [];
-ruleOutput = [];
+ruleInput = [];  // a list of strings defining inputs to enhancement
+ruleOutput = [];  // a list of strings defining outputs of enhancement
 myBigSquare = [];
 
 // How long is the input? A useful thing to know.
@@ -25,6 +25,7 @@ var inputParsed = dailyInput.split('\n'); // splitting the input into lines by n
 
 for (var z=0; z<inputParsed.length; z++) {
 	inputParsed[z] = inputParsed[z].split(' ');
+	//console.log(inputParsed[z]);
 	ruleInput[z] = inputParsed[z][0].split('/').join(); // take out the '/' from string
 	ruleOutput[z] = inputParsed[z][2].split('/').join();	
 }           // now we have our input mapping rules
@@ -32,7 +33,7 @@ for (var z=0; z<inputParsed.length; z++) {
 function rotateCW(inSquare, times) { // rotate a square 'times' number of times
 	var localArray = [];
 	var borderLen = Math.sqrt(inSquare.length);
-	console.log('Rotating square of border length: ' + borderLen);
+	//console.log('Rotating square of border length: ' + borderLen);
 	for (var i=0; i<borderLen; i++) {
 		//cycle through and rotate the thing
 	}
@@ -42,7 +43,7 @@ function rotateCW(inSquare, times) { // rotate a square 'times' number of times
 function flipSquare(inSquare) {  // take an array and flip it over the X axis
 	var localArray = [];
 	var borderLen = Math.sqrt(inSquare.length);
-	console.log('Flipping square of border length: ' + borderLen);
+	//console.log('Flipping square of border length: ' + borderLen);
 	for (var i=0; i<borderLen; i++) {
 		//cycle through and flip the thing
 	}
@@ -56,7 +57,7 @@ for (var m=0; m<ruleInput.length; m++) {
 		ruleMap.set(flipSquare(rotateCW(ruleInput[m],rot)),ruleOutput[m]);  // flipped
 	}
 }
-console.log(ruleMap.entries()); // this should show all 8 iterations of ruleInput
+//console.log(ruleMap.entries()); // this should show all 8 iterations of ruleInput
 
 
 function processSquare(inSquare) {
@@ -86,7 +87,9 @@ while (iteration <= maxIterations) {  // look at const maxIterations to know whe
 			}
 		}
 	}
-	return myBigSquare = newSquare;
+//	return myBigSquare = newSquare;
+	iteration++;
+	console.log(`${flipSquare(myBigSquare)} - ${flipSquare(myBigSquare)}\r`);
 }
 
 answer1 = 0;
