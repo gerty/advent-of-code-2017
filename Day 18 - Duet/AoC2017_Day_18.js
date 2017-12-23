@@ -92,7 +92,9 @@ while ((i<allInput.length) && (i>=0)) {
 console.log('Answer to Day 18 Part 1 = ' + answer1);
 // Now for Part 2
 
-myData.clear();
+var myDataA = {};
+var myDataB = {};
+
 i = 0;
 j = 0;
 
@@ -113,51 +115,88 @@ var deadlockB = 0;
 var a2b = [];
 var b2a = [];
 
-while ((i<aSide.length) 
-	&& (i>=0) 
-	&& (deadlockA<4) 
-	&& (deadlockA<4) 
-	&& (j<bSide.length) 
-	&& (j>=0)) { 
-	console.log(myData);
+
+
+while ((i<aSide.length)&&(i>=0)&&((deadlockA<4)||(deadlockB<4))&&(j<bSide.length)&&(j>=0)) { 
 	switch(aSide[i][0]) {
 		case 'snd' :
 			a2b.push(getVal(aSide[i][1]));
+			answer2++;
+			console.log('A: ' + myDataA + ' B: ' + myDataB);
 			i++;
 			deadlockB = 0;
 			break;
 		case 'set' :
-			if (myData[aSide[i][1]]) myData[aSide[i][1]] = getVal(aSide[i][2]);
-			else { myData[aSide[i][1]] = getVal(aSide[i][2]); }
+			if (myDataA[aSide[i][1]]) myDataA[aSide[i][1]] = getVal(aSide[i][2]);
+			else { myDataA[aSide[i][1]] = getVal(aSide[i][2]); }
 			i++;
 			break;
 		case 'add' :
-			if (myData[aSide[i][1]] === undefined) myData[aSide[i][1]] = 0;
-			myData[aSide[i][1]] += getVal(aSide[i][2]);
+			if (myDataA[aSide[i][1]] === undefined) myDataA[aSide[i][1]] = 0;
+			myDataA[aSide[i][1]] += getVal(aSide[i][2]);
 			i++;
 			break;
 		case 'mul' :
-			if (myData[aSide[i][1]] === undefined) myData[aSide[i][1]] = 0;
-			myData[aSide[i][1]] *= getVal(aSide[i][2]);
+			if (myDataA[aSide[i][1]] === undefined) myDataA[aSide[i][1]] = 0;
+			myDataA[aSide[i][1]] *= getVal(aSide[i][2]);
 			i++;
 			break;
 		case 'mod' :
-			if (myData[aSide[i][1]] === undefined) myData[aSide[i][1]] = 0;
-			myData[aSide[i][1]] %= getVal(aSide[i][2]);
+			if (myDataA[aSide[i][1]] === undefined) myDataA[aSide[i][1]] = 0;
+			myDataA[aSide[i][1]] %= getVal(aSide[i][2]);
 			i++;
 			break;
 		case 'rcv' :
-			if (b2a.length>0) myData[aSide[i++][1]] = b2a.unshift();
+			if (b2a.length>0) myDataA[aSide[i++][1]] = b2a.unshift();
 			else deadlockA++;
 			break;
 		case 'jgz' : 
-			if (myData[aSide[i][1]] === 0) i++;
+			if (myDataA[aSide[i][1]] <= 0) i++;
 			else i = i + getVal(aSide[i][2]);
 			break;
 		default :
 			i++;
 			break;
 	}
+	switch(bSide[j][0]) {
+		case 'snd' :
+			b2a.push(getVal(bSide[j][1]));
+			j++;
+			deadlockA = 0;
+			break;
+		case 'set' :
+			if (myDataB[bSide[j][1]]) myDataB[bSide[j][1]] = getVal(bSide[j][2]);
+			else { myDataB[bSide[j][1]] = getVal(bSide[j][2]); }
+			j++;
+			break;
+		case 'add' :
+			if (myDataB[bSide[i][1]] === undefined) myDataB[bSide[j][1]] = 0;
+			myDataB[bSide[j][1]] += getVal(bSide[j][2]);
+			j++;
+			break;
+		case 'mul' :
+			if (myDataB[bSide[i][1]] === undefined) myDataB[bSide[j][1]] = 0;
+			myDataB[bSide[j][1]] *= getVal(bSide[j][2]);
+			j++;
+			break;
+		case 'mod' :
+			if (myDataB[bSide[i][1]] === undefined) myDataB[bSide[j][1]] = 0;
+			myDataB[bSide[j][1]] %= getVal(bSide[j][2]);
+			j++;
+			break;
+		case 'rcv' :
+			if (a2b.length>0) myDataB[bSide[j++][1]] = a2b.unshift();
+			else deadlockB++;
+			break;
+		case 'jgz' : 
+			if (myDataB[bSide[j][1]] <= 0) j++;
+			else j = j + getVal(bSide[j][2]);
+			break;
+		default :
+			j++;
+			break;
+	}
+
 }
 
 

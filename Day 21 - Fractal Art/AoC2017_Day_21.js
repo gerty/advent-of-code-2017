@@ -21,12 +21,21 @@ myBigSquare = [];
 //////////////////////////////////////////////////
 function rotateCW(inSquare, times) { // rotate a square 'times' number of times
 	var localArray = [];
-	var borderLen = Math.sqrt(inSquare.length);
-	//console.log('Rotating square of border length: ' + borderLen);
-	for (var i=0; i<borderLen; i++) {
-		//cycle through and rotate the thing
+	var borderLen = 0;
+	if (inSquare.length>=9) borderLen=3;
+	else borderLen = 2;
+	console.log('Rotating square of border length: ' + borderLen);
+	switch times {
+		case 1 : { // rotating CW 1 turn
+			for (var i=0; i<borderLen; i++) { 
+				for (var j=0; j<borderLen; j++) {
+					inSquare....????
+				}
+			}
+		}
+
 	}
-	return localArray;
+
 }
 
 function flipSquare(inSquare) {  // take an array and flip it over the X axis
@@ -36,7 +45,6 @@ function flipSquare(inSquare) {  // take an array and flip it over the X axis
 	for (var i=0; i<borderLen; i++) {
 		//cycle through and flip the thing
 	}
-	return inSquare;
 }
 
 function processSquare(inSquare) {
