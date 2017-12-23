@@ -99,13 +99,13 @@ i = 0;
 j = 0;
 
 var aSide = dailyInput.split('\n'); // splitting the input into lines by newline
-// then convert to an array of integers
+// then convert to an array
 for (var z=0; z<aSide.length; z++) {
 	aSide[z] = aSide[z].split(' '); 
 }
 
 var bSide = dailyInput.split('\n'); // splitting the input into lines by newline
-// then convert to an array of integers
+// then convert to an array
 for (var z=0; z<bSide.length; z++) {
 	bSide[z] = bSide[z].split(' '); 
 }
@@ -114,8 +114,6 @@ var deadlockA = 0;
 var deadlockB = 0;
 var a2b = [];
 var b2a = [];
-
-
 
 while ((i<aSide.length)&&(i>=0)&&((deadlockA<4)||(deadlockB<4))&&(j<bSide.length)&&(j>=0)) { 
 	switch(aSide[i][0]) {
@@ -170,17 +168,17 @@ while ((i<aSide.length)&&(i>=0)&&((deadlockA<4)||(deadlockB<4))&&(j<bSide.length
 			j++;
 			break;
 		case 'add' :
-			if (myDataB[bSide[i][1]] === undefined) myDataB[bSide[j][1]] = 0;
+			if (myDataB[bSide[j][1]] === undefined) myDataB[bSide[j][1]] = 0;
 			myDataB[bSide[j][1]] += getVal(bSide[j][2]);
 			j++;
 			break;
 		case 'mul' :
-			if (myDataB[bSide[i][1]] === undefined) myDataB[bSide[j][1]] = 0;
+			if (myDataB[bSide[j][1]] === undefined) myDataB[bSide[j][1]] = 0;
 			myDataB[bSide[j][1]] *= getVal(bSide[j][2]);
 			j++;
 			break;
 		case 'mod' :
-			if (myDataB[bSide[i][1]] === undefined) myDataB[bSide[j][1]] = 0;
+			if (myDataB[bSide[j][1]] === undefined) myDataB[bSide[j][1]] = 0;
 			myDataB[bSide[j][1]] %= getVal(bSide[j][2]);
 			j++;
 			break;
@@ -196,7 +194,7 @@ while ((i<aSide.length)&&(i>=0)&&((deadlockA<4)||(deadlockB<4))&&(j<bSide.length
 			j++;
 			break;
 	}
-
+	console.log('i='+i+' j='+j+' a2b='+a2b+' b2a='+b2a);
 }
 
 
