@@ -22,7 +22,7 @@ for (var z=0; z<allInput.length; z++) {
 }
 
 var frequency = 0;
-var myData = {};
+var myData = {'a':0,'b':0,'c':0,'d':0,'e':0,'f':0,'g':0,'h':0};
 
 console.log(allInput);
 var i = 0;
@@ -37,8 +37,8 @@ function getVal(str) { // find the variable value, or converts string to actual 
 }
 
 while ((i<allInput.length) && (i>=0)) { 
-	console.log(myData);
-	console.log('Current position in instructions: ' + i);
+	//console.log('Current position in instructions: ' + i);
+	//if (myData['e'] > 0) myData['e'] += 108400;
 	switch(allInput[i][0]) {
 /*		case 'snd' :
 			console.log('Playing sound with frequency: ' + getVal(allInput[i][1]));
@@ -48,11 +48,11 @@ while ((i<allInput.length) && (i>=0)) {
 		case 'set' :
 			if (myData[allInput[i][1]] != undefined) {
 				myData[allInput[i][1]] = getVal(allInput[i][2]);
-				console.log('Adjusting old ' + allInput[i][1] + ' to ' + getVal(allInput[i][2]));
+				//console.log('Adjusting old ' + allInput[i][1] + ' to ' + getVal(allInput[i][2]));
 			}
 			else {
 				myData[allInput[i][1]] = getVal(allInput[i][2]);
-				console.log('Setting new ' + allInput[i][1] + ' to ' + getVal(allInput[i][2]));
+				//console.log('Setting new ' + allInput[i][1] + ' to ' + getVal(allInput[i][2]));
 			}
 			i++;
 			break;
@@ -65,14 +65,14 @@ while ((i<allInput.length) && (i>=0)) {
 		case 'sub' :
 			if (myData[allInput[i][1]] === undefined) myData[allInput[i][1]] = 0;
 			myData[allInput[i][1]] -= getVal(allInput[i][2]);
-			console.log('Subtracting ' + getVal(allInput[i][1]) + ' by ' + allInput[i][2]);
+			//console.log('Subtracting ' + getVal(allInput[i][1]) + ' by ' + allInput[i][2]);
 			i++;
 			break;
 		case 'mul' :
-			console.log('*****Mul invoked****');
+			//console.log('*****Mul invoked****');
 			if (myData[allInput[i][1]] === undefined) myData[allInput[i][1]] = 0;
 			myData[allInput[i][1]] *= getVal(allInput[i][2]);
-			console.log('Multiplying ' + getVal(allInput[i][2]) + ' by ' + allInput[i][1]);
+			//console.log('Multiplying ' + getVal(allInput[i][2]) + ' by ' + allInput[i][1]);
 			i++;
 			answer1++;
 			break;
@@ -105,6 +105,7 @@ while ((i<allInput.length) && (i>=0)) {
 			i++;
 			break;
 	}
+	if (myData['h'] > 0) console.log(myData);
 }
 
 console.log('Answer to Day 23 Part 1 = ' + answer1);
