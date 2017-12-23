@@ -47,32 +47,22 @@ while ((i<allInput.length) && (i>=0)) {
 			i++;
 			break;
 		case 'set' :
-			if (myData[allInput[i][1]] != undefined) {
-				myData[allInput[i][1]] = getVal(allInput[i][2]);
-				console.log('Adjusting old ' + allInput[i][1] + ' to ' + getVal(allInput[i][2]));
-			}
-			else {
-				myData[allInput[i][1]] = getVal(allInput[i][2]);
-				console.log('Setting new ' + allInput[i][1] + ' to ' + getVal(allInput[i][2]));
-			}
+			myData[allInput[i][1]] = getVal(allInput[i][2]);
 			i++;
 			break;
 		case 'add' :
 			if (myData[allInput[i][1]] === undefined) myData[allInput[i][1]] = 0;
 			myData[allInput[i][1]] += getVal(allInput[i][2]);
-			console.log('Adding ' + getVal(allInput[i][2] + ' to ' + allInput[i][1]));
 			i++;
 			break;
 		case 'mul' :
 			if (myData[allInput[i][1]] === undefined) myData[allInput[i][1]] = 0;
 			myData[allInput[i][1]] *= getVal(allInput[i][2]);
-			console.log('Multiplying ' + getVal(allInput[i][2] + ' by ' + allInput[i][1]));
 			i++;
 			break;
 		case 'mod' :
 			if (myData[allInput[i][1]] === undefined) myData[allInput[i][1]] = 0;
 			myData[allInput[i][1]] %= getVal(allInput[i][2]);
-			console.log(allInput[i][1] + ' modulo ' + getVal(allInput[i][2]));
 			i++;
 			break;
 		case 'rcv' :
@@ -101,4 +91,74 @@ while ((i<allInput.length) && (i>=0)) {
 
 console.log('Answer to Day 18 Part 1 = ' + answer1);
 // Now for Part 2
+
+myData.clear();
+i = 0;
+j = 0;
+
+var aSide = dailyInput.split('\n'); // splitting the input into lines by newline
+// then convert to an array of integers
+for (var z=0; z<aSide.length; z++) {
+	aSide[z] = aSide[z].split(' '); 
+}
+
+var bSide = dailyInput.split('\n'); // splitting the input into lines by newline
+// then convert to an array of integers
+for (var z=0; z<bSide.length; z++) {
+	bSide[z] = bSide[z].split(' '); 
+}
+
+var deadlockA = 0;
+var deadlockB = 0;
+var a2b = [];
+var b2a = [];
+
+while ((i<aSide.length) 
+	&& (i>=0) 
+	&& (deadlockA<4) 
+	&& (deadlockA<4) 
+	&& (j<bSide.length) 
+	&& (j>=0)) { 
+	console.log(myData);
+	switch(aSide[i][0]) {
+		case 'snd' :
+			a2b.push(getVal(aSide[i][1]));
+			i++;
+			deadlockB = 0;
+			break;
+		case 'set' :
+			if (myData[aSide[i][1]]) myData[aSide[i][1]] = getVal(aSide[i][2]);
+			else { myData[aSide[i][1]] = getVal(aSide[i][2]); }
+			i++;
+			break;
+		case 'add' :
+			if (myData[aSide[i][1]] === undefined) myData[aSide[i][1]] = 0;
+			myData[aSide[i][1]] += getVal(aSide[i][2]);
+			i++;
+			break;
+		case 'mul' :
+			if (myData[aSide[i][1]] === undefined) myData[aSide[i][1]] = 0;
+			myData[aSide[i][1]] *= getVal(aSide[i][2]);
+			i++;
+			break;
+		case 'mod' :
+			if (myData[aSide[i][1]] === undefined) myData[aSide[i][1]] = 0;
+			myData[aSide[i][1]] %= getVal(aSide[i][2]);
+			i++;
+			break;
+		case 'rcv' :
+			if (b2a.length>0) myData[aSide[i++][1]] = b2a.unshift();
+			else deadlockA++;
+			break;
+		case 'jgz' : 
+			if (myData[aSide[i][1]] === 0) i++;
+			else i = i + getVal(aSide[i][2]);
+			break;
+		default :
+			i++;
+			break;
+	}
+}
+
+
 console.log('Answer to Day 18 Part 2 = ' + answer2);
