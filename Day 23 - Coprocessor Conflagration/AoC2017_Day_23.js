@@ -40,11 +40,11 @@ while ((i<allInput.length) && (i>=0)) {
 	console.log(myData);
 	console.log('Current position in instructions: ' + i);
 	switch(allInput[i][0]) {
-		case 'snd' :
+/*		case 'snd' :
 			console.log('Playing sound with frequency: ' + getVal(allInput[i][1]));
 			soundLastPlayed = getVal(allInput[i][1]);
 			i++;
-			break;
+			break;*/
 		case 'set' :
 			if (myData[allInput[i][1]] != undefined) {
 				myData[allInput[i][1]] = getVal(allInput[i][2]);
@@ -56,19 +56,27 @@ while ((i<allInput.length) && (i>=0)) {
 			}
 			i++;
 			break;
-		case 'add' :
+/*		case 'add' :
 			if (myData[allInput[i][1]] === undefined) myData[allInput[i][1]] = 0;
 			myData[allInput[i][1]] += getVal(allInput[i][2]);
 			console.log('Adding ' + getVal(allInput[i][2] + ' to ' + allInput[i][1]));
 			i++;
-			break;
-		case 'mul' :
+			break;*/
+		case 'sub' :
 			if (myData[allInput[i][1]] === undefined) myData[allInput[i][1]] = 0;
-			myData[allInput[i][1]] *= getVal(allInput[i][2]);
-			console.log('Multiplying ' + getVal(allInput[i][2] + ' by ' + allInput[i][1]));
+			myData[allInput[i][1]] -= getVal(allInput[i][2]);
+			console.log('Subtracting ' + getVal(allInput[i][1]) + ' by ' + allInput[i][2]);
 			i++;
 			break;
-		case 'mod' :
+		case 'mul' :
+			console.log('*****Mul invoked****');
+			if (myData[allInput[i][1]] === undefined) myData[allInput[i][1]] = 0;
+			myData[allInput[i][1]] *= getVal(allInput[i][2]);
+			console.log('Multiplying ' + getVal(allInput[i][2]) + ' by ' + allInput[i][1]);
+			i++;
+			answer1++;
+			break;
+/*		case 'mod' :
 			if (myData[allInput[i][1]] === undefined) myData[allInput[i][1]] = 0;
 			myData[allInput[i][1]] %= getVal(allInput[i][2]);
 			console.log(allInput[i][1] + ' modulo ' + getVal(allInput[i][2]));
@@ -78,17 +86,18 @@ while ((i<allInput.length) && (i>=0)) {
 			if (getVal(allInput[i][1]) != 0) {
 				myData[allInput[i][1]] = soundLastPlayed; // "recovering"?
 				console.log('Just recovered sound to ' + soundLastPlayed);
-				answer1 = soundLastPlayed;
+				//answer1 = soundLastPlayed;
 				i=-1;
 			}
 			i++;
-			break;
-		case 'jgz' : 
-			if (myData[allInput[i][1]] === 0) {
+			break;*/
+		case 'jnz' : 
+			if (getVal(myData[allInput[i][1]]) === 0) {
 				i++;
+				//console.log('Here because ' + getVal(myData[allInput[i][1]]));
 			}
 			else {
-				console.log('Jump ahead ' + getVal(allInput[i][1]));
+				//console.log('Jump ahead ' + getVal(allInput[i][1]));
 				i = i + getVal(allInput[i][2]);
 			}
 			break;
@@ -101,3 +110,4 @@ while ((i<allInput.length) && (i>=0)) {
 console.log('Answer to Day 23 Part 1 = ' + answer1);
 // Now for Part 2
 console.log('Answer to Day 23 Part 2 = ' + answer2);
+
