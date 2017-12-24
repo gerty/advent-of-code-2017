@@ -194,7 +194,7 @@ while ((i<aSide.length)&&(i>=0)&&((deadlockA<4)||(deadlockB<4))&&(j<bSide.length
 			j++;
 			break;
 	}
-	console.log('i='+i+' j='+j+' a2b='+a2b+' b2a='+b2a);
+	console.log('i=' + i + ' j=' + j + ' a2b=' + a2b + ' b2a=' + b2a);
 }
 
 
