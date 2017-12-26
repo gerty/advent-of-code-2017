@@ -84,6 +84,6 @@ while (iterations > 0) {  // while we haven't burned through all of our iteratio
 
 console.log(allInput);
 
-console.log('Answer to Day 18 Part 1 = ' + answer1); // not 438, 401 too low
+console.log('Answer to Day 18 Part 1 = ' + answer1); // not 438, 401 & 405 too low
 // Now for Part 2
 console.log('Answer to Day 18 Part 2 = ' + answer2);
